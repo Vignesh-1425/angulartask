@@ -1,0 +1,80 @@
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1 *ngIf="actionid==''">Create Register</h1>
+					<h1 *ngIf="actionid!=''">Edit Register</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+						<li class="breadcrumb-item" *ngIf="actionid==''"><a href="javascript:void(0);" routerLink="..">Register</a></li>
+						<li class="breadcrumb-item" *ngIf="actionid!=''"><a href="javascript:void(0);" routerLink="../..">Register</a></li>
+						<li class="breadcrumb-item active" *ngIf="actionid==''">Create New Register</li>
+						<li class="breadcrumb-item active" *ngIf="actionid!=''">Edit Register</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="content">
+		<flash-messages></flash-messages>
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title custom-card-title" *ngIf="actionid==''">Create New Register</h3>
+				<h3 class="card-title custom-card-title" *ngIf="actionid!=''">Edit Register</h3>
+				<div class="card-tools">
+					<a routerLink=".." class="btn btn-primary btn-block" *ngIf="actionid==''">Back</a>
+					<a routerLink="../.." class="btn btn-primary btn-block" *ngIf="actionid!=''">Back</a>
+				</div>
+			</div>
+			<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="productname">Name</label>
+								<input type="text" class="form-control" id="productname" placeholder="Enter Name" formControlName="name">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="productcode">Email</label>
+								<input type="email" class="form-control" id="email" placeholder="Enter Email" formControlName="email">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="image">Image</label>
+								<div class="input-group">
+									<div class="custom-file">
+										<input type="file" class="custom-file-input" id="image" (change)="onFileChange($event)">
+										<label class="custom-file-label" for="image">Choose file</label>
+									</div>
+									<a href="{{image}}" class="plr5" target="_blank" *ngIf="image!=''"><img src="{{image}}" width="100"></a>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="phone">Phone</label>
+								<input type="number" class="form-control" id="phone" placeholder="Enter phone" formControlName="phone">
+							</div>
+						</div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label for="productbuy">password</label>
+								<input type="password" class="form-control" id="password" placeholder="Enter password" formControlName="password">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer">
+					<input type="hidden" formControlName="actionid">
+					<button type="submit" [disabled]="registerForm.invalid" class="btn btn-primary">Submit</button>
+				</div>
+			</form>
+		</div>
+	</section>
+
+

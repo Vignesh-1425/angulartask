@@ -1,0 +1,56 @@
+	<section class="content-header">
+		<div class="container-fluid">
+			<div class="row mb-2">
+				<div class="col-sm-6">
+					<h1>Register Details</h1>
+				</div>
+				<div class="col-sm-6">
+					<ol class="breadcrumb float-sm-right">
+						<li class="breadcrumb-item"><a href="javascript:void(0);">Home</a></li>
+						<li class="breadcrumb-item active">Register Details</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="content">
+		<flash-messages></flash-messages>
+		<div class="card">
+			<div class="card-header">
+				<h3 class="card-title custom-card-title">Register Details</h3>
+				<div class="card-tools">
+					<a routerLink="../../../register/action" class="btn btn-primary btn-block">Create New Register</a>
+				</div>
+			</div>
+			<div class="card-body">
+				<table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="table table-bordered row-border hover" style="width:100%">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Email</th>
+							<th>phone</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody *ngIf="register?.length != 0">
+						<tr *ngFor="let registers of register">
+							<td>{{ registers.name }}</td>
+							<td>{{ registers.email }}</td>
+							<td>{{ registers.phone }}</td>
+							<td class="nowrap">
+								<a routerLink="../../../register/action/{{ registers.id }}" class="btn btn-primary btn-sm mr5" title="Edit"><i class="fa fa-edit"></i></a>
+								<a href="javascript:void(0);" (click)="delete(registers.id)" class="btn btn-danger btn-sm" title="Delete"><i class="fa fa-trash"></i></a>
+							</td>
+						</tr>
+					</tbody>
+					<tbody *ngIf="register?.length == 0">
+						<tr>
+							<td colspan="8" class="no-data-available text-center">No data!</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+
+
